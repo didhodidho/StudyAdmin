@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>AdminLTE</display-name>
+  
+  
+  <!-- JDBC사용을 위한 컨텍스트 초기화 파라미터를 설정
+  해당 설정값은 웹어플리케이션의 모든 JSP페이지에서 사용이
+  가능하다. -->
+  <context-param>
+     <param-name>JDBCDriver</param-name>
+     <param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+     <param-name>ConnectionURL</param-name>
+     <param-value>jdbc:oracle:thin:@localhost:1521:orcl2</param-value>
+  </context-param>
+  
+  <!-- 세션유지시간설정(분단위로함) : 30분으로 설정 -->
+  <session-config>
+     <session-timeout>60</session-timeout>
+  </session-config>
+   
+  <!-- 게시판 페이지 처리 관련 파라미터 설정 -->  
+  <context-param>
+     <param-name>PAGE_SIZE</param-name>
+     <param-value>5</param-value>
+  </context-param>
+  <context-param>
+     <param-name>BLOCK_PAGE</param-name>
+     <param-value>5</param-value>
+  </context-param>
+  
+   
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
