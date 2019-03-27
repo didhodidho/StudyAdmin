@@ -26,6 +26,9 @@
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="../common/AdminLTE-master/dist/css/skins/_all-skins.min.css">
 
+<!-- DataTables -->
+  <link rel="stylesheet" href="../common/AdminLTE-master/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  
 <!-- Google Font -->
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -123,88 +126,82 @@
 
 
 
-<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-md-12">
+
+
+<!-- 메인 -->
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
 			<div class="box">
-            <div class="box-header">
-              <h3 class="box-title">강의 목록</h3>
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                  <div class="input-group-btn">
-                    <button type="submit" name="searchWord" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.box-header -->
-				<div class="box-body table-responsive no-padding" >
-					<table class="table table-bordered">
-						<tbody>
-							<tr>
-								<th class="text-center" style="width:2%;">강의IDX</th>
-								<th class="text-center" style="width:5%;">강의시작년월일</th>
-								<th class="text-center" style="width:5%;">강의종료년월일</th>
-								<th class="text-center" style="width:5%;">강의요일</th>
-								<th class="text-center" style="width:5%;">강의시작시간</th>
-								<th class="text-center" style="width:5%;">강의종료시간</th>
-								<th class="text-center" style="width:10%;">강의명</th>
-								<th class="text-center" style="width:2%;">수강인원</th>
-								<th class="text-center" style="width:5%;">수강료</th>
-								<th class="text-center" style="width:2%;">강사IDX</th>
-								<th class="text-center" style="width:3%;"></th>
-							</tr> 
-							<c:choose>
-								<c:when test="${empty lists }">
-									<tr>
-										<td colspan="6">
-											등록된 데이터가 없습니다.
-										</td>
-									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${lists }" var="row" varStatus="loop">
-										<tr> 
-											<td>${row.classidx }</td>
-											<td>${row.acastartdate }</td>
-											<td>${row.acaenddate }</td>
-											<td>${row.acaday }</td>
-											<td>${row.acastarttime }</td>
-											<td>${row.acaendtime }</td>
-											<td>${row.acaclassname }</td>
-											<td>${row.numberofparticipants }</td>
-											<td>${row.pay }</td>
-											<td>${row.teaidx }</td>
-											<td>
-												<button type="button"
-												 class="btn btn-danger btn-block btn-sm"
-												 onclick="location.href='../01Main/AcaClassListDelete.do?classidx=${row.classidx}&nowPage=${param.nowPage }';"><i class="fa fa-times"></i></button>
-											</td>
-										</tr>
-										
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>			
-				</div>
-				<div class="box-footer clearfix">
-					<ul class="pagination pagination-sm no-margin pull-right">
-						${pagingImg }
-					</ul>
-				</div>
+	            <div class="box-header">
+	              <h3 class="box-title">강의 목록</h3>
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	              <table id="example1" class="table table-bordered table-striped">
+	                <thead>
+	                <tr>
+	                  	<th class="text-center" style="width:2%;">강의IDX</th>
+						<th class="text-center" style="width:5%;">강의시작년월일</th>
+						<th class="text-center" style="width:5%;">강의종료년월일</th>
+						<th class="text-center" style="width:5%;">강의요일</th>
+						<th class="text-center" style="width:5%;">강의시작시간</th>
+						<th class="text-center" style="width:5%;">강의종료시간</th>
+						<th class="text-center" style="width:10%;">강의명</th>
+						<th class="text-center" style="width:2%;">수강인원</th>
+						<th class="text-center" style="width:5%;">수강료</th>
+						<th class="text-center" style="width:2%;">강사IDX</th>
+						<th class="text-center" style="width:3%;"></th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <c:choose>
+					<c:when test="${empty lists }">
+						<tr>
+							<td colspan="6">
+								등록된 데이터가 없습니다.
+							</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${lists }" var="row" varStatus="loop">
+	                <tr>
+	                  <td>${row.classidx }</td>
+						<td>${row.acastartdate }</td>
+						<td>${row.acaenddate }</td>
+						<td>${row.acaday }</td>
+						<td>${row.acastarttime }</td>
+						<td>${row.acaendtime }</td>
+						<td>${row.acaclassname }</td>
+						<td>${row.numberofparticipants }</td>
+						<td>${row.pay }</td>
+						<td>${row.teaidx }</td>
+						<td>
+							<button type="button"
+							 class="btn btn-danger btn-block btn-sm"
+							 onclick="location.href='../01Main/AcaClassListDelete.do?classidx=${row.classidx}&nowPage=${param.nowPage }';"><i class="fa fa-times"></i></button>
+						</td>
+	                </tr>
+	                		</c:forEach>
+						</c:otherwise>
+					</c:choose>
+	                </tbody>
+	               </table>
+	              </div>
+		            <div class="box-footer clearfix">
+						<ul class="pagination pagination-sm no-margin pull-right">
+							${pagingImg }
+						</ul>
+					</div>
 			</div>
 		</div>
-		</div>
-	</section>
-<!-- Main content -->
+	</div>
+</section>
+<!-- 메인 -->
 
 
 
+</div>
 </div>
 
 <footer class="main-footer">
@@ -216,11 +213,6 @@
 All rights reserved.
 </footer>
 
-
-
-
-   
-</div>
 
 
 
@@ -250,6 +242,9 @@ All rights reserved.
 <script src="../common/AdminLTE-master/dist/js/demo.js"></script>
 <!-- /AdminLTE/WebContent/WEB-INF/common/AdminLTE-master/dist/js/demo.js -->
 
+<!-- DataTables -->
+<script src="../common/AdminLTE-master/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<!-- <script src="../common/AdminLTE-master/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
 <script>
   $(function () {
     $('#example1').DataTable()

@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.AcaDAO;
 import model.AcaTeacherDTO;
+import model.AcaiIntroduceDAO;
 import model.AcaiIntroduceDTO;
+import model.MembersDAO;
+import model.ReviewDAO;
 import util.PagingUtil;
 
 @WebServlet("/01Main/adminList.do")
@@ -28,6 +31,23 @@ public class ListCtrl extends HttpServlet{
 		AcaDAO dao = new AcaDAO(application);
 		
 		Map param = new HashMap();
+		
+		//////////////심플 대시보드
+		//회원 수
+		MembersDAO mdao = new MembersDAO(application);
+		int tMembers = mdao.getTotalMemberCount(param);
+		param.put("totalCount", tMembers);
+		//리뷰 수
+		ReviewDAO rdao = new ReviewDAO(application);
+		int tReview = rdao.getTotalRecordCount(param);
+		param.put("ReviewCount", tReview);
+		//학원 등록 수
+		AcaiIntroduceDAO Acdao = new AcaiIntroduceDAO(application);
+		int acaIntro = Acdao.getTotalRecordCount2(param);
+		param.put("AcIntroCount", acaIntro);
+		//모든 수 멥에 저장
+		req.setAttribute("map", param);
+		/////////////
 		
 		String addQueryString = "";
 		

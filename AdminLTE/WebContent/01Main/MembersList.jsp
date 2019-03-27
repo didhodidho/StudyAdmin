@@ -24,6 +24,9 @@
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="../common/AdminLTE-master/dist/css/skins/_all-skins.min.css">
 
+<!-- DataTables -->
+  <link rel="stylesheet" href="../common/AdminLTE-master/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  
 <!-- Google Font -->
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -119,99 +122,87 @@
 
 
 
-<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-md-12">
+<!-- 메인 -->
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
 			<div class="box">
-            <div class="box-header">
-              <h3 class="box-title">일반회원 정보 목록</h3>
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.box-header -->
-				<div class="box-body table-responsive no-padding" >
-					<table class="table table-bordered">
-						<tbody>
-							<tr>
-								<th class="text-center" style="width:3%;">아이디</th>
-								<th class="text-center" style="width:3%;">패스워드</th>
-								<th class="text-center" style="width:3%;">가입일자</th>
-								<th class="text-center" style="width:5%;">이메일아이디</th>
-								<th class="text-center" style="width:3%;">휴대폰</th>
-								<th class="text-center" style="width:3%;">가입자이름</th>
-								
-								<th class="text-center" style="width:3%;">아이디 고유번호</th>
-								<th class="text-center" style="width:3%;">아이디 등급</th>
-								
-								<!-- <th class="text-center" style="width:6%;">대표전화</th>
-								<th class="text-center" style="width:20%;">학원주소</th> -->
-								<th class="text-center" style="width:3%;">관심사</th>
-								<!-- <th class="text-center" style="width:10%;">학원명</th> -->
-								
-								<th class="text-center" style="width:2%;"></th>
-							</tr>
-							<c:choose>
-								<c:when test="${empty lists }">
-									<tr>
-										<td colspan="6">
-											등록된 데이터가 없습니다.
-										</td>
-									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${lists }" var="row" varStatus="loop">
-									
-										
-										<tr>
-											<td>${row.id }</td>
-											<td>${row.pass }</td>
-											<td>${row.regidate }</td>
-											<td>${row.emailId }@${row.emailDomain }</td>
-											<td>${row.mobile1 }-${row.mobile2 }-${row.mobile3 }</td>
-											<td>${row.name }</td>
-											<td>${row.idx }</td>
-											<td>${row.grade }</td>
-											<%-- <td>${row.telephone1 }-${row.telephone2 }-${row.telephone3 }</td>
-											<td>${row.address } ${row.detailAddress }</td> --%>
-											<td>${row.interest }</td>
-											<%-- <td>${row.acaName }</td> --%>
-											
-											<td>
-												<button type="button"
-												 class="btn btn-danger btn-block btn-sm"
-												 onclick="location.href='../01Main/MembersDelete.do?idx=${row.idx}&nowPage=${param.nowPage }';"><i class="fa fa-times"></i></button>
-											</td>
-										</tr>
-										
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>			
-				</div>
-				<div class="box-footer clearfix">
-					<ul class="pagination pagination-sm no-margin pull-right">
-						${pagingImg }
-					</ul>
-				</div>
+	            <div class="box-header">
+	              <h3 class="box-title">일반회원 정보 목록</h3>
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	              <table id="example1" class="table table-bordered table-striped">
+	                <thead>
+	                <tr>
+	                  	<th class="text-center" style="width:3%;">아이디</th>
+						<th class="text-center" style="width:3%;">패스워드</th>
+						<th class="text-center" style="width:3%;">가입일자</th>
+						<th class="text-center" style="width:5%;">이메일아이디</th>
+						<th class="text-center" style="width:3%;">휴대폰</th>
+						<th class="text-center" style="width:3%;">가입자이름</th>
+						
+						<th class="text-center" style="width:3%;">아이디 고유번호</th>
+						<th class="text-center" style="width:3%;">아이디 등급</th>
+						
+						<!-- <th class="text-center" style="width:6%;">대표전화</th>
+						<th class="text-center" style="width:20%;">학원주소</th> -->
+						<th class="text-center" style="width:3%;">관심사</th>
+						<!-- <th class="text-center" style="width:10%;">학원명</th> -->
+						
+						<th class="text-center" style="width:2%;"></th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <c:choose>
+					<c:when test="${empty lists }">
+						<tr>
+							<td colspan="6">
+								등록된 데이터가 없습니다.
+							</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${lists }" var="row" varStatus="loop">
+	                <tr>
+	                  <td>${row.id }</td>
+						<td>${row.pass }</td>
+						<td>${row.regidate }</td>
+						<td>${row.emailId }@${row.emailDomain }</td>
+						<td>${row.mobile1 }-${row.mobile2 }-${row.mobile3 }</td>
+						<td>${row.name }</td>
+						<td>${row.idx }</td>
+						<td>${row.grade }</td>
+						<%-- <td>${row.telephone1 }-${row.telephone2 }-${row.telephone3 }</td>
+						<td>${row.address } ${row.detailAddress }</td> --%>
+						<td>${row.interest }</td>
+						<%-- <td>${row.acaName }</td> --%>
+						
+						<td>
+							<button type="button"
+							 class="btn btn-danger btn-block btn-sm"
+							 onclick="location.href='../01Main/MembersDelete.do?idx=${row.idx}&nowPage=${param.nowPage }';"><i class="fa fa-times"></i></button>
+						</td>
+	                </tr>
+	                		</c:forEach>
+						</c:otherwise>
+					</c:choose>
+	                </tbody>
+	               </table>
+	              </div>
+		            <div class="box-footer clearfix">
+						<ul class="pagination pagination-sm no-margin pull-right">
+							${pagingImg }
+						</ul>
+					</div>
 			</div>
 		</div>
-		</div>
-	</section>
-<!-- Main content -->
+	</div>
+</section>
+<!-- 메인 -->
 
 
-
-
+</div>
 </div>
 
 <footer class="main-footer">
@@ -227,7 +218,7 @@ All rights reserved.
 
 
    
-</div>
+
 
 
 
@@ -253,5 +244,22 @@ All rights reserved.
 <!-- AdminLTE for demo purposes -->
 <script src="../common/AdminLTE-master/dist/js/demo.js"></script>
 <!-- /AdminLTE/WebContent/WEB-INF/common/AdminLTE-master/dist/js/demo.js -->
+
+<!-- DataTables -->
+<script src="../common/AdminLTE-master/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<!-- <script src="../common/AdminLTE-master/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
 </body>
 </html>
