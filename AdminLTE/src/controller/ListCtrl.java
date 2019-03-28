@@ -32,7 +32,7 @@ public class ListCtrl extends HttpServlet{
 		
 		Map param = new HashMap();
 		
-		//////////////심플 대시보드
+		/*----------심플 대시보드---------------------*/
 		//회원 수
 		MembersDAO mdao = new MembersDAO(application);
 		int tMembers = mdao.getTotalMemberCount(param);
@@ -47,21 +47,14 @@ public class ListCtrl extends HttpServlet{
 		param.put("AcIntroCount", acaIntro);
 		//모든 수 멥에 저장
 		req.setAttribute("map", param);
-		/////////////
-		
-		String addQueryString = "";
-		
+		/*----------심플 대시보드---------------------*/
 		
 		//학원선생님 게시물갯수 반환
 		int totalRecordCount = dao.getTotalRecordCount(param);
 		param.put("totalCount", totalRecordCount);
 		
-		
-		/////////////////////////
-		int pageSize = Integer.parseInt(
-	 			application.getInitParameter("PAGE_SIZE"));
-	 	int blockPage = Integer.parseInt(
-	 			application.getInitParameter("BLOCK_PAGE"));
+		int pageSize = Integer.parseInt(application.getInitParameter("PAGE_SIZE"));
+	 	int blockPage = Integer.parseInt(application.getInitParameter("BLOCK_PAGE"));
 	 	
 	 	//전체페이지수 계산 - 학원선생님
 	 	int totalPage =
@@ -70,12 +63,8 @@ public class ListCtrl extends HttpServlet{
 	 	System.out.println("전체레코드수:" + totalRecordCount);
 	 	System.out.println("전체페이지수:" + totalPage);
 	 	
-	 	int nowPage = (req.getParameter("nowPage")==null
-	 			|| req.getParameter("nowPage").equals(""))
-	 			?
-	 			1
-	 			:
-	 			Integer.parseInt(req.getParameter("nowPage"));
+	 	int nowPage = (req.getParameter("nowPage")==null || req.getParameter("nowPage").equals(""))
+	 			? 1 : Integer.parseInt(req.getParameter("nowPage"));
 	 	
 	 	int start = (nowPage-1) * pageSize + 1;
 	 	int end = nowPage * pageSize;
@@ -88,21 +77,24 @@ public class ListCtrl extends HttpServlet{
 	 	param.put("totalCount", totalRecordCount);//전체레코드갯수
 	 	param.put("pageSize", pageSize);//한페이지에 출력할 게시물갯수
 	 	
+	 	/* 페이징 처리 및 학원정보 리스트 출력 */
+	 	Map map = dao.selectPaging(param);
+	 	List lists = (List)map.get("AcaTeacherDTO");
 	 	
-	 	List<AcaTeacherDTO> lists = dao.selectPaging(param);
+	 	String addQueryString = "";
 	 	String pagingImg = util.PagingUtil.pagingImgServlet(
 	 			totalRecordCount,pageSize,
 	 			blockPage, nowPage,
 	 			"../01Main/adminList.do?"+addQueryString);
-	 	
+	 	/* 페이징 처리 및 학원정보 리스트 출력 */
 	 	
 	 	//자원해제
 	 	dao.close();
 	 	
+	 	req.setAttribute("lists2", map.get("MembersDTO"));
 	 	req.setAttribute("lists", lists);
 		req.setAttribute("map", param);
 		req.setAttribute("pagingImg", pagingImg);
-		
 		
 		RequestDispatcher dis =
 				req.getRequestDispatcher("/01Main/adminList.jsp");

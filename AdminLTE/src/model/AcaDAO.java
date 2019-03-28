@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -15,6 +18,7 @@ public class AcaDAO {
 	PreparedStatement psmt;
 	ResultSet rs;
 	
+	//커넥션 연결 
 	public AcaDAO(ServletContext ctx) {
 		try {
 			/*
@@ -56,23 +60,24 @@ public class AcaDAO {
 	}
 	
 	//리스트 페이징 처리 - 학원선생님
-	public java.util.List<AcaTeacherDTO> selectPaging(Map map)
+	public Map selectPaging(Map map )
 	{
 		java.util.List<AcaTeacherDTO> bbs = new Vector<AcaTeacherDTO>();
+		java.util.List<MembersDTO> bbs2 = new Vector<MembersDTO>();
+		
+		Map returnMap = new HashMap();
 		
 		String sql = ""
 				+" select * from ( "
 				+"	    select Tb.*, ROWNUM rNum from "
 				+"	        ( "
-				+"	            select * from AcaTeacher ";
-			
-				if(map.get("Word")!=null) {
-					//검색어가 있다면 조건절 추가
-					sql += " where "+ map.get("Column") +" "
-						+ "	like '%"+ map.get("word") +"%' ";
-				}
+				/*+"	            select teaidx, AcaName, teaimage, teaname, teaintro, subject, Members.id "*/
+				/*+"	            select teaimage, teaname, teaintro, subject, AcaTeacher.id, AcaName "*/
+				+"	            select * "
+				+ " from AcaTeacher inner join Members "
+				+ "				on AcaTeacher.id = Members.id	 ";
 				
-				sql += " ORDER BY TeaIdx DESC"
+				sql += " ORDER BY TeaIdx desc"
 				
 				+"	        ) Tb "
 				+"	) "
@@ -94,7 +99,12 @@ public class AcaDAO {
 					dto.setTeaidx(rs.getString(5));
 					dto.setId(rs.getString(6));
 					
+					MembersDTO dto2 = new MembersDTO();
+					dto2.setAcaName(rs.getString("acaname"));
+					//bbs2.add(dto2);
+					
 					bbs.add(dto);
+					bbs2.add(dto2);
 				}
 				
 			} catch (Exception e) {
@@ -102,10 +112,13 @@ public class AcaDAO {
 				e.printStackTrace();
 			}
 			
-			return bbs;
+			returnMap.put("AcaTeacherDTO", bbs);
+			returnMap.put("MembersDTO", bbs2);
+			return returnMap;
 	}
 	
-	 
+
+	//게시물 삭제
 	//학원소개 삭제하기
 	public int delete(String TeaIdx) {
 		
@@ -128,9 +141,7 @@ public class AcaDAO {
 		
 	}
 	
-	
-	
-	
+	//자원반납
 	//자원반납
 	public void close() {
 		try {

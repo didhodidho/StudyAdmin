@@ -135,22 +135,22 @@
 	              <table id="example1" class="table table-bordered table-striped">
 	                <thead>
 	                <tr>
-	                  	<th class="text-center" style="width:3%;">아이디</th>
+	                  	<th class="text-center" style="width:2%;">아이디</th>
 						<th class="text-center" style="width:3%;">패스워드</th>
 						<th class="text-center" style="width:3%;">가입일자</th>
 						<th class="text-center" style="width:5%;">이메일아이디</th>
 						<th class="text-center" style="width:3%;">휴대폰</th>
 						<th class="text-center" style="width:3%;">가입자이름</th>
 						
-						<th class="text-center" style="width:3%;">아이디 고유번호</th>
-						<th class="text-center" style="width:3%;">아이디 등급</th>
+						<th class="text-center" style="width:2%;">아이디 고유번호</th>
+						<th class="text-center" style="width:2%;">아이디 등급</th>
 						
 						<!-- <th class="text-center" style="width:6%;">대표전화</th>
 						<th class="text-center" style="width:20%;">학원주소</th> -->
 						<th class="text-center" style="width:3%;">관심사</th>
 						<!-- <th class="text-center" style="width:10%;">학원명</th> -->
 						
-						<th class="text-center" style="width:2%;"></th>
+						<th class="text-center" style="width:1%;"></th>
 	                </tr>
 	                </thead>
 	                <tbody>

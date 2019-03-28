@@ -190,13 +190,14 @@
 	              <table id="example1" class="table table-bordered table-striped">
 	                <thead>
 	                <tr>
-	                  	<th class="text-center" style="width:2%;">idx</th>
-						<th class="text-center" style="width:5%;">이미지</th>
-						<th class="text-center" style="width:5%;">강사명</th>
+	                  	<th class="text-center" style="width:1%;">idx</th>
+	                  	<th class="text-center" style="width:3%;">학원명</th>
+						<th class="text-center" style="width:0.5%;">이미지</th>
+						<th class="text-center" style="width:2%;">강사명</th>
 						<th class="text-center" style="width:10%;">강사소개</th>
 						<th class="text-center" style="width:3%;">강의과목</th>
-						<th class="text-center" style="width:8%;">아이디</th>
-						<th class="text-center" style="width:3%;"></th>
+						<th class="text-center" style="width:4%;">학원 아이디</th>
+						<th class="text-center" style="width:1%;"></th>
 	                </tr>
 	                </thead>
 	                <tbody>
@@ -210,9 +211,12 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${lists }" var="row" varStatus="loop">
+<%-- 						<c:forEach items="${lists2 }" var="row2" varStatus="loop"> --%>
+						
 	                <tr>
 	                  <td>${row.teaidx }</td>
-						<td style="padding: 3px;height:100px;wieth:100px;"><img src="../common/images/학원광고.jpg" style="width:100%;height:100%" />${row.teaimage }</td>
+	                  <td>${lists2[loop.index].acaName}</td>
+						<td style="width: 50px;height: 50px;"><img style="width: 100px;height: 100px;" src="../common/images/${row.teaimage }" />${row.teaimage }</td>
 						<td>${row.teaname }</td>
 						<td>${row.teaintro }</td>
 						<td>${row.subject }</td>
@@ -223,7 +227,8 @@
 							 onclick="location.href='../01Main/AcaTeacherDeleteCtrl.do?teaidx=${row.teaidx}&nowPage=${param.nowPage }';"><i class="fa fa-times"></i></button>
 						</td>
 	                </tr>
-	                		</c:forEach>
+	                </c:forEach>
+<%-- 	                		</c:forEach> --%>
 						</c:otherwise>
 					</c:choose>
 	                </tbody>

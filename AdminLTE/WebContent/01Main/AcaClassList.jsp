@@ -141,17 +141,17 @@
 	              <table id="example1" class="table table-bordered table-striped">
 	                <thead>
 	                <tr>
-	                  	<th class="text-center" style="width:2%;">강의IDX</th>
+	                  	<th class="text-center" style="width:1%;">강의IDX</th>
 						<th class="text-center" style="width:5%;">강의시작년월일</th>
 						<th class="text-center" style="width:5%;">강의종료년월일</th>
-						<th class="text-center" style="width:5%;">강의요일</th>
+						<th class="text-center" style="width:2%;">강의요일</th>
 						<th class="text-center" style="width:5%;">강의시작시간</th>
 						<th class="text-center" style="width:5%;">강의종료시간</th>
 						<th class="text-center" style="width:10%;">강의명</th>
 						<th class="text-center" style="width:2%;">수강인원</th>
 						<th class="text-center" style="width:5%;">수강료</th>
-						<th class="text-center" style="width:2%;">강사IDX</th>
-						<th class="text-center" style="width:3%;"></th>
+						<th class="text-center" style="width:1%;">강사IDX</th>
+						<th class="text-center" style="width:1%;"></th>
 	                </tr>
 	                </thead>
 	                <tbody>

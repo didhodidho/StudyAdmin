@@ -208,13 +208,13 @@
 	              <table id="example1" class="table table-bordered table-striped">
 	                <thead>
 	                <tr>
-	                  	<th class="text-center" style="width:2%;">리뷰IDX</th>
+	                  	<th class="text-center" style="width:1%;">리뷰IDX</th>
 						<th class="text-center" style="width:5%;">아이디</th>
 						<th class="text-center" style="width:10%;">리뷰내용</th>
 						<th class="text-center" style="width:2%;">별점</th>
-						<th class="text-center" style="width:5%;">작성일자</th>
-						<th class="text-center" style="width:2%;">학원IDX</th>
-						<th class="text-center" style="width:3%;"></th>
+						<th class="text-center" style="width:4%;">작성일자</th>
+						<th class="text-center" style="width:1%;">학원IDX</th>
+						<th class="text-center" style="width:1%;"></th>
 	                </tr>
 	                </thead>
 	                <tbody>
