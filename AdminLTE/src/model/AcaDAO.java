@@ -142,7 +142,6 @@ public class AcaDAO {
 	}
 	
 	//자원반납
-	//자원반납
 	public void close() {
 		try {
 			if(rs!=null) rs.close();

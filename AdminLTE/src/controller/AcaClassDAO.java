@@ -68,14 +68,9 @@ public class AcaClassDAO {
 				+" select * from ( "
 				+"	    select Tb.*, ROWNUM rNum from "
 				+"	        ( "
-				+"	            select * from AcaClass ";
+				/*+"	            select * from AcaClass ";*/
+				+"	            select to_char(acastartDate, 'yyyy-mm-dd'),to_char(acaendDate, 'yyyy-mm-dd'),acaday,to_char(acastarttime, 'HH24:mi:ss'),to_char(acaendtime, 'HH24:mi:ss'),acaclassname,numberofparticipants,classidx,teaidx,pay from AcaClass ";
 			
-				if(map.get("Word")!=null) {
-					//검색어가 있다면 조건절 추가
-					sql += " where "+ map.get("Column") +" "
-						+ "	like '%"+ map.get("word") +"%' ";
-				}
-				
 				sql += " ORDER BY ClassIdx DESC"
 				
 				+"	        ) Tb "
