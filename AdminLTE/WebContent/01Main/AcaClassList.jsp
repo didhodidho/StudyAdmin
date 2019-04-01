@@ -142,14 +142,16 @@
 	                <thead>
 	                <tr>
 	                  	<th class="text-center" style="width:1%;">강의IDX</th>
+	                  	<th class="text-center" style="width:2%;">학원명</th>
+	                  	<th class="text-center" style="width:2%;">강사명</th>
 						<th class="text-center" style="width:5%;">강의시작년월일</th>
 						<th class="text-center" style="width:5%;">강의종료년월일</th>
-						<th class="text-center" style="width:2%;">강의요일</th>
-						<th class="text-center" style="width:5%;">강의시작시간</th>
-						<th class="text-center" style="width:5%;">강의종료시간</th>
+						<th class="text-center" style="width:3%;">강의요일</th>
+						<th class="text-center" style="width:3%;">강의시작시간</th>
+						<th class="text-center" style="width:3%;">강의종료시간</th>
 						<th class="text-center" style="width:10%;">강의명</th>
-						<th class="text-center" style="width:2%;">수강인원</th>
-						<th class="text-center" style="width:5%;">수강료</th>
+						<th class="text-center" style="width:3%;">수강인원</th>
+						<th class="text-center" style="width:3%;">수강료</th>
 						<th class="text-center" style="width:1%;">강사IDX</th>
 						<th class="text-center" style="width:1%;"></th>
 	                </tr>
@@ -167,6 +169,8 @@
 						<c:forEach items="${lists }" var="row" varStatus="loop">
 	                <tr>
 	                  <td>${row.classidx }</td>
+	                  <td>${lists2[loop.index].acaName}</td>
+	                  <td>${lists3[loop.index].teaname}</td>
 						<td>${row.acastartdate }</td>
 						<td>${row.acaenddate }</td>
 						<td>${row.acaday }</td>

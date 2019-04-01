@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -11,6 +12,8 @@ import javax.servlet.ServletContext;
 
 import model.AcaClassDTO;
 import model.AcaTeacherDTO;
+import model.AcaiIntroduceDTO;
+import model.MembersDTO;
 
 public class AcaClassDAO {
 	
@@ -60,16 +63,24 @@ public class AcaClassDAO {
 	}
 	
 	//리스트 페이징 처리 - 강의시간표
-	public java.util.List<AcaClassDTO> selectPaging(Map map)
+	public Map selectPaging(Map map)
 	{
 		java.util.List<AcaClassDTO> bbs = new Vector<AcaClassDTO>();
+		java.util.List<MembersDTO> bbs2 = new Vector<MembersDTO>();
+		java.util.List<AcaTeacherDTO> bbs3 = new Vector<AcaTeacherDTO>();
+		
+		Map returnMap = new HashMap();
 		
 		String sql = ""
 				+" select * from ( "
 				+"	    select Tb.*, ROWNUM rNum from "
 				+"	        ( "
 				/*+"	            select * from AcaClass ";*/
-				+"	            select to_char(acastartDate, 'yyyy-mm-dd'),to_char(acaendDate, 'yyyy-mm-dd'),acaday,to_char(acastarttime, 'HH24:mi:ss'),to_char(acaendtime, 'HH24:mi:ss'),acaclassname,numberofparticipants,classidx,teaidx,pay from AcaClass ";
+				+"	            select to_char(acastartDate, 'yyyy-mm-dd'),to_char(acaendDate, 'yyyy-mm-dd'),acaday,to_char(acastarttime, 'HH24:mi'),to_char(acaendtime, 'HH24:mi'),acaclassname,numberofparticipants,classidx,AcaClass.teaidx,pay"
+				+ " ,teaname,acaname from AcaClass inner join acateacher"
+				+ " on AcaClass.teaidx = acateacher.teaidx "
+				+ " inner join members "
+				+ " on members.id = acateacher.id ";
 			
 				sql += " ORDER BY ClassIdx DESC"
 				
@@ -97,6 +108,14 @@ public class AcaClassDAO {
 					dto.setTeaidx(rs.getString(9));
 					dto.setPay(rs.getString(10));
 					
+					MembersDTO dto2 = new MembersDTO();
+					dto2.setAcaName(rs.getString("acaname"));
+					bbs2.add(dto2);
+					
+					AcaTeacherDTO dto3 = new AcaTeacherDTO();
+					dto3.setTeaname(rs.getString("teaname"));
+					bbs3.add(dto3);
+					
 					bbs.add(dto);
 				}
 				
@@ -105,7 +124,11 @@ public class AcaClassDAO {
 				e.printStackTrace();
 			}
 			
-			return bbs;
+			returnMap.put("AcaClassDTO", bbs);
+			returnMap.put("MembersDTO", bbs2);
+			returnMap.put("AcaTeacherDTO", bbs3);
+			
+			return returnMap;
 	}
 	
 	//강의시간표 삭제하기

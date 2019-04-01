@@ -209,7 +209,8 @@
 	                <thead>
 	                <tr>
 	                  	<th class="text-center" style="width:1%;">리뷰IDX</th>
-						<th class="text-center" style="width:5%;">아이디</th>
+						<th class="text-center" style="width:3%;">아이디</th>
+						<th class="text-center" style="width:3%;">학원명</th>
 						<th class="text-center" style="width:10%;">리뷰내용</th>
 						<th class="text-center" style="width:2%;">별점</th>
 						<th class="text-center" style="width:4%;">작성일자</th>
@@ -231,8 +232,9 @@
 	                <tr>
 	                  <td>${row.reviewidx }</td>
 						<td>${row.id }</td>
+						<td>${lists2[loop.index].acaName}</td>
 						<td>${row.reviewcontents }</td>
-						<td>${row.score }</td>
+						<td>${row.score } / 5.0</td>
 						<td>${row.writetime }</td>
 						<td>${row.acaidx }</td>
 						<td>

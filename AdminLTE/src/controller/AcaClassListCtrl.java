@@ -80,8 +80,11 @@ public class AcaClassListCtrl extends HttpServlet{
 	 	param.put("totalCount", totalRecordCount);//전체레코드갯수
 	 	param.put("pageSize", pageSize);//한페이지에 출력할 게시물갯수
 	 	
+	 	Map map = dao.selectPaging(param);
+	 	List lists = (List)map.get("AcaClassDTO");
 	 	
-	 	List<AcaClassDTO> lists = dao.selectPaging(param);
+	 	//강의 시간
+	 	//List<AcaClassDTO> lists = dao.selectPaging(param);
 	 	String pagingImg = util.PagingUtil.pagingImgServlet(
 	 			totalRecordCount,pageSize,
 	 			blockPage, nowPage,
@@ -89,6 +92,9 @@ public class AcaClassListCtrl extends HttpServlet{
 	 	
 	 	//자원해제
 	 	dao.close();
+	 	
+	 	req.setAttribute("lists2", map.get("MembersDTO"));
+	 	req.setAttribute("lists3", map.get("AcaTeacherDTO"));
 	 	
 	 	req.setAttribute("lists", lists);
 		req.setAttribute("map", param);

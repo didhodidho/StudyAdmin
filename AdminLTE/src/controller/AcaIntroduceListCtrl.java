@@ -68,9 +68,11 @@ public class AcaIntroduceListCtrl extends HttpServlet{
 	 	param.put("totalPage2", totalPage2);
 	 	param.put("totalCount2", totalRecordCount2);//전체레코드갯수
 	 	
+	 	Map map = dao.selectPaging2(param);
+	 	List lists2 = (List)map.get("AcaTeacherDTO");
 	 	
 	 	//학원 소개
-	 	List<AcaiIntroduceDTO> lists2 = dao.selectPaging2(param);
+	 	//List<AcaiIntroduceDTO> lists2 = dao.selectPaging2(param);
 	 	String pagingImg2 = util.PagingUtil.pagingImgServlet(
 				totalRecordCount2,pageSize,
 				blockPage, nowPage,
@@ -79,6 +81,7 @@ public class AcaIntroduceListCtrl extends HttpServlet{
 	 	//자원해제
 	 	dao.close();
 	 	
+	 	req.setAttribute("lists3", map.get("MembersDTO"));
 	 	req.setAttribute("lists2", lists2);
 		req.setAttribute("map", param);
 		req.setAttribute("pagingImg2", pagingImg2);

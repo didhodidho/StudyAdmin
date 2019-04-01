@@ -216,7 +216,7 @@
 	                <tr>
 	                  <td>${row.teaidx }</td>
 	                  <td>${lists2[loop.index].acaName}</td>
-						<td style="width: 50px;height: 50px;"><img style="width: 100px;height: 100px;" src="../common/images/${row.teaimage }" />${row.teaimage }</td>
+						<td style="width: 50px;height: 50px;"><img style="width: 100px;height: 100px;" src="../common/images/${row.teaimage }" /><br />${row.teaimage }</td>
 						<td>${row.teaname }</td>
 						<td>${row.teaintro }</td>
 						<td>${row.subject }</td>

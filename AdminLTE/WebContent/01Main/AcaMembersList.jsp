@@ -142,8 +142,8 @@
 						<th class="text-center" style="width:7%;">휴대폰</th>
 						<th class="text-center" style="width:3%;">가입자이름</th>
 						
-						<th class="text-center" style="width:2%;">아이디 고유번호</th>
-						<th class="text-center" style="width:2%;">아이디 등급</th>
+						<th class="text-center" style="width:5%;">ID고유번호</th>
+						<th class="text-center" style="width:3%;">아이디 등급</th>
 						<th class="text-center" style="width:6%;">대표전화</th>
 						<th class="text-center" style="width:10%;">학원주소</th>
 						<th class="text-center" style="width:5%;">학원명</th>
@@ -169,8 +169,8 @@
 						<td>${row.emailId }@${row.emailDomain }</td>
 						<td>${row.mobile1 }-${row.mobile2 }-${row.mobile3 }</td>
 						<td>${row.name }</td>
-						<td>${row.idx }</td>
-						<td>${row.grade }</td>
+						<td class="text-center">${row.idx }</td>
+						<td class="text-center">${row.grade }</td>
 						<td>${row.telephone1 }-${row.telephone2 }-${row.telephone3 }</td>
 						<td>${row.address } ${row.detailAddress }</td>
 						<td>${row.acaName }</td>

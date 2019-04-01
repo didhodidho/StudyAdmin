@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -55,22 +56,19 @@ public class AcaiIntroduceDAO {
 	}
 	
 	//리스트 페이징 처리 - 학원소개
-	public java.util.List<AcaiIntroduceDTO> selectPaging2(Map map)
+	public Map selectPaging2(Map map)
 	{
 		java.util.List<AcaiIntroduceDTO> bbs = new Vector<AcaiIntroduceDTO>();
+		java.util.List<MembersDTO> bbs2 = new Vector<MembersDTO>();
+		
+		Map returnMap = new HashMap();
 		
 		String sql = ""
 				+" select * from ( "
 				+"	    select Tb.*, ROWNUM rNum from "
 				+"	        ( "
-				+"	            select * from AcaIntroduce ";
+				+"	            select * from AcaIntroduce inner join Members on AcaIntroduce.id = Members.id ";
 			
-				if(map.get("Word")!=null) {
-					//검색어가 있다면 조건절 추가
-					sql += " where "+ map.get("Column") +" "
-						+ "	like '%"+ map.get("word") +"%' ";
-				}
-				
 				sql += " ORDER BY Category DESC"
 				
 				+"	        ) Tb "
@@ -91,6 +89,10 @@ public class AcaiIntroduceDAO {
 					dto.setAcaintrophoto(rs.getString(3));
 					dto.setId(rs.getString(4));
 					
+					MembersDTO dto2 = new MembersDTO();
+					dto2.setAcaName(rs.getString("acaname"));
+					bbs2.add(dto2);
+					
 					bbs.add(dto);
 				}
 				
@@ -99,7 +101,10 @@ public class AcaiIntroduceDAO {
 				e.printStackTrace();
 			}
 			
-			return bbs;
+			returnMap.put("AcaTeacherDTO", bbs);
+			returnMap.put("MembersDTO", bbs2);
+			
+			return returnMap;
 	}
 	
 	//학원소개 삭제하기

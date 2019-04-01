@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -54,15 +55,18 @@ public class ReviewDAO {
 	
 	
 	//리스트 페이징 처리 - 리뷰
-	public java.util.List<ReviewWriteDTO> selectPaging(Map map)
+	public Map selectPaging(Map map)
 	{
 		java.util.List<ReviewWriteDTO> bbs = new Vector<ReviewWriteDTO>();
+		java.util.List<MembersDTO> bbs2 = new Vector<MembersDTO>();
+		
+		Map returnMap = new HashMap();
 		
 		String sql = ""
 				+" select * from ( "
 				+"	    select Tb.*, ROWNUM rNum from "
 				+"	        ( "
-				+"	            select * from ReviewWrite ";
+				+"	            select r.*,(select acaname from members s where s.idx = r.acaidx) acaname from reviewwrite r ";
 			
 				if(map.get("Word")!=null) {
 					//검색어가 있다면 조건절 추가
@@ -92,6 +96,10 @@ public class ReviewDAO {
 					dto.setAcaidx(rs.getString(5));
 					dto.setReviewidx(rs.getString(6));
 					
+					MembersDTO dto2 = new MembersDTO();
+					dto2.setAcaName(rs.getString("acaname"));
+					bbs2.add(dto2);
+					
 					bbs.add(dto);
 				}
 				
@@ -100,7 +108,10 @@ public class ReviewDAO {
 				e.printStackTrace();
 			}
 			
-			return bbs;
+			returnMap.put("AcaTeacherDTO", bbs);
+			returnMap.put("MembersDTO", bbs2);
+			
+			return returnMap;
 	}
 	
 	//리뷰 삭제하기

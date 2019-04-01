@@ -138,6 +138,7 @@
 	              <table id="example1" class="table table-bordered table-striped">
 	                <thead>
 	                <tr>
+	                	<th class="text-center" style="width:5%;">학원명</th>
 						<th class="text-center" style="width:20%;">학원소개</th>
 						<th class="text-center" style="width:5%;">학원카테고리</th>
 						<th class="text-center" style="width:10%;">학원소개사진</th>
@@ -157,9 +158,10 @@
 					<c:otherwise>
 						<c:forEach items="${lists2 }" var="row" varStatus="loop">
 	                <tr>
+	                	<td>${lists3[loop.index].acaName}</td>
 						<td>${row.introduce }</td>
 						<td>${row.category }</td>
-						<td><img style="width: 100px;height: 100px;" src="../common/images/${row.acaintrophoto }" style="width:100%;height:100%" />${row.acaintrophoto }</td>
+						<td><img style="width: 100px;height: 100px;" alt="등록이미지 없음" src="../common/images/${row.acaintrophoto }" style="width:100%;height:100%" /><br />${row.acaintrophoto }</td>
 						<td>${row.id }</td>
 						<td>
 							<button type="button"

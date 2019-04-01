@@ -64,7 +64,9 @@ public class ReviewListCtrl extends HttpServlet{
 	 	param.put("totalCount", totalRecordCount);//전체레코드갯수
 	 	param.put("pageSize", pageSize);//한페이지에 출력할 게시물갯수
 	 	
-	 	List<ReviewWriteDTO> lists = dao.selectPaging(param);
+	 	Map map = dao.selectPaging(param);
+	 	List lists = (List)map.get("AcaTeacherDTO");
+	 	//List<ReviewWriteDTO> lists = dao.selectPaging(param);
 	 	String pagingImg = util.PagingUtil.pagingImgServlet(
 	 			totalRecordCount,pageSize,
 	 			blockPage, nowPage,
@@ -73,6 +75,7 @@ public class ReviewListCtrl extends HttpServlet{
 	 	//자원해제
 	 	dao.close();
 	 	
+	 	req.setAttribute("lists2", map.get("MembersDTO"));
 	 	req.setAttribute("lists", lists);
 	 	req.setAttribute("map", param);
 		req.setAttribute("pagingImg", pagingImg);
