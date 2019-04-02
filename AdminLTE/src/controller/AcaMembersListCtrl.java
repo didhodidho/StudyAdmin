@@ -34,7 +34,7 @@ public class AcaMembersListCtrl extends HttpServlet{
 		
 		/////////////////////////
 		int pageSize = Integer.parseInt(
-	 			application.getInitParameter("PAGE_SIZE"));
+	 			application.getInitParameter("PAGE_SIZE2"));
 	 	int blockPage = Integer.parseInt(
 	 			application.getInitParameter("BLOCK_PAGE"));
 	 	

@@ -33,9 +33,9 @@ public class ReviewListCtrl extends HttpServlet{
 		//리뷰 게시물갯수 반환
 		int totalRecordCount = dao.getTotalRecordCount(param);
 		param.put("totalCount", totalRecordCount);
-		
+		 
 		int pageSize = Integer.parseInt(
-	 			application.getInitParameter("PAGE_SIZE"));
+	 			application.getInitParameter("PAGE_SIZE2"));
 	 	int blockPage = Integer.parseInt(
 	 			application.getInitParameter("BLOCK_PAGE"));
 	 	
