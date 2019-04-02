@@ -142,7 +142,7 @@
 						<th class="text-center" style="width:3%;">휴대폰</th>
 						<th class="text-center" style="width:3%;">가입자이름</th>
 						
-						<th class="text-center" style="width:2%;">아이디 고유번호</th>
+						<th class="text-center" style="width:3%;">아이디 고유번호</th>
 						<th class="text-center" style="width:2%;">아이디 등급</th>
 						
 						<!-- <th class="text-center" style="width:6%;">대표전화</th>

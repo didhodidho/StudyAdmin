@@ -36,7 +36,7 @@ public class ListCtrl extends HttpServlet{
 		//회원 수
 		MembersDAO mdao = new MembersDAO(application);
 		int tMembers = mdao.getTotalMemberCount(param);
-		param.put("totalCount", tMembers);
+		param.put("totalCountM", tMembers);
 		//리뷰 수
 		ReviewDAO rdao = new ReviewDAO(application);
 		int tReview = rdao.getTotalRecordCount(param);

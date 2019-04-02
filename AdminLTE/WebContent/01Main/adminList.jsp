@@ -132,7 +132,7 @@
   <!-- small box -->
   <div class="small-box bg-yellow">
     <div class="inner">
-      <h3>${map.totalCount }</h3>
+      <h3>${map.totalCountM }</h3>
 
       <p>전체 회원 수</p>
     </div>
