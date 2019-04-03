@@ -224,7 +224,7 @@
 						<td>
 							<button type="button"
 							 class="btn btn-danger btn-block btn-sm"
-							 onclick="location.href='../01Main/AcaTeacherDeleteCtrl.do?teaidx=${row.teaidx}&nowPage=${param.nowPage }';"><i class="fa fa-times"></i></button>
+							 onclick="if (confirm('정말 삭제하시겠습니까?')){ location.href='../01Main/AcaTeacherDeleteCtrl.do?teaidx=${row.teaidx}&nowPage=${param.nowPage }'; } else{ return false;}"><i class="fa fa-times"></i></button>
 						</td>
 	                </tr>
 	                </c:forEach>
